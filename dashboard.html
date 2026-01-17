@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="src/output.css" />
+  </head>
+
+  <body class="bg-slate-50">
+   <div class="min-h-screen bg-slate-50 flex items-stretch">
+
+
+      <!-- Sidebar -->
+      <aside class="min-h-full w-[86px] bg-[#06122E]
+              shadow-[0_25px_60px_-35px_rgba(2,6,23,0.9)]
+              flex flex-col items-center py-6">
+
+        <div class="h-2"></div>
+
+        <!-- Nav icons -->
+        <nav class="mt-2 flex flex-col items-center gap-5">
+
+          <!-- Active -->
+          <a href="#"
+             class="group h-14 w-14 rounded-2xl bg-[#1D4ED8] grid place-items-center
+                    shadow-[0_18px_38px_-22px_rgba(29,78,216,0.9)]
+                    transition hover:brightness-110">
+            <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="4" y="4" width="7" height="7" rx="1.5"></rect>
+              <rect x="13" y="4" width="7" height="7" rx="1.5"></rect>
+              <rect x="4" y="13" width="7" height="7" rx="1.5"></rect>
+              <rect x="13" y="13" width="7" height="7" rx="1.5"></rect>
+            </svg>
+          </a>
+
+          <!-- Inactive -->
+          <a href="#"
+             class="group h-14 w-14 rounded-2xl bg-white/8 border border-white/10 grid place-items-center
+                    transition hover:bg-white/12">
+            <svg class="h-6 w-6 text-white/85" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="4" y="4" width="7" height="7" rx="1.5"></rect>
+              <rect x="13" y="4" width="7" height="7" rx="1.5"></rect>
+              <rect x="4" y="13" width="7" height="7" rx="1.5"></rect>
+              <rect x="13" y="13" width="7" height="7" rx="1.5"></rect>
+            </svg>
+          </a>
+
+          <!-- Calendar -->
+          <a href="#"
+             class="group h-14 w-14 rounded-2xl bg-transparent grid place-items-center
+                    transition hover:bg-white/8">
+            <svg class="h-6 w-6 text-white/75 group-hover:text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M8 2v4M16 2v4" />
+              <path d="M3 10h18" />
+              <path d="M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+            </svg>
+          </a>
+
+          <!-- Briefcase -->
+          <a href="#"
+             class="group h-14 w-14 rounded-2xl bg-transparent grid place-items-center
+                    transition hover:bg-white/8">
+            <svg class="h-6 w-6 text-white/75 group-hover:text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M10 6h4" />
+              <path d="M10 6a2 2 0 0 0-2 2v1h8V8a2 2 0 0 0-2-2" />
+              <path d="M4 9h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9z" />
+            </svg>
+          </a>
+
+          <!-- Pie -->
+          <a href="#"
+             class="group h-14 w-14 rounded-2xl bg-transparent grid place-items-center
+                    transition hover:bg-white/8">
+            <svg class="h-6 w-6 text-white/75 group-hover:text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M12 12V3a9 9 0 1 1-9 9h9z" />
+              <path d="M12 12h9a9 9 0 0 0-9-9v9z" />
+            </svg>
+          </a>
+        </nav>
+
+        <div class="flex-1"></div>
+
+        <div class="flex flex-col items-center gap-5 pb-2">
+          <button type="button"
+            class="h-12 w-12 rounded-2xl bg-transparent grid place-items-center
+                   transition hover:bg-white/8 cursor-pointer"
+            aria-label="Settings">
+            <svg class="h-6 w-6 text-white/70 hover:text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M12 20a8 8 0 1 0-8-8 8 8 0 0 0 8 8z" />
+              <path d="M12 14a2 2 0 1 0-2-2 2 2 0 0 0 2 2z" />
+              <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.6 2.8-0.2-.1a1.7 1.7 0 0 0-2 .4l-.1.1-3.2-1.3v-.2a1.7 1.7 0 0 0-1.4-1.2h-.2l-3.2 1.3-.1-.1a1.7 1.7 0 0 0-2-.4l-.2.1-1.6-2.8.1-.1a1.7 1.7 0 0 0 .3-1.9v-.2L1.7 12v-.2l2.1-1.2v-.2a1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.6-2.8.2.1a1.7 1.7 0 0 0 2-.4l.1-.1 3.2 1.3v.2A1.7 1.7 0 0 0 12 6.6h.2l3.2-1.3.1.1a1.7 1.7 0 0 0 2 .4l.2-.1 1.6 2.8-.1.1a1.7 1.7 0 0 0-.3 1.9v.2L22.3 12v.2L20.2 13v.2z" opacity=".08"/>
+            </svg>
+          </button>
+
+          <img src="img/Admin.webp" alt="Admin"
+               class="h-11 w-11 rounded-full object-cover border-2 border-white/10 shadow-[0_12px_30px_-22px_rgba(0,0,0,0.9)]" />
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+     <main class="flex-1 px-3 py-4 sm:px-4 sm:py-6 lg:px-6">
+
+     <div class="mx-auto w-full max-w-full lg:max-w-6xl xl:max-w-7xl 2xl:max-w-[1400px]">
+
+
+          <!-- Top Bar -->
+<header class="w-full bg-white border border-slate-200 rounded-3xl overflow-hidden">
+  <div class="w-full px-4 sm:px-8 lg:px-10 py-4">
+
+     
+    <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+
+      <!-- Title -->
+      <div class="text-left">
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">Dashboard</h1>
+        <p class="mt-1 text-sm text-slate-500">
+          Welcome back — here is a quick overview of your tasks.
+        </p>
+      </div>
+ 
+      <div class="flex items-center gap-3 w-full lg:w-auto lg:justify-end">
+
+        <label class="relative block w-full lg:w-[340px]">
+          <span class="sr-only">Search</span>
+
+          <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M21 21l-4.35-4.35"></path>
+          </svg>
+
+          <input
+            type="search"
+            placeholder="Search for a task..."
+            class="w-full rounded-2xl border border-slate-200 bg-slate-50/70
+                   pl-4 pr-11 py-2.5 text-sm text-slate-700
+                   outline-none transition
+                   focus:bg-white focus:border-[#0B2E6B] focus:ring-2 focus:ring-[#0B2E6B]/20"
+          />
+        </label>
+
+        <button type="button"
+          class="relative h-11 w-11 shrink-0 rounded-2xl bg-slate-50 border border-slate-200 grid place-items-center
+                 transition hover:bg-slate-100 cursor-pointer"
+          aria-label="Notifications">
+          <svg class="h-5 w-5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 7h18s-3 0-3-7" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          <span class="absolute top-2 right-2 h-2.5 w-2.5 rounded-full bg-rose-500 ring-2 ring-white"></span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+
+          <!-- Stats Cards -->
+          <section class="mt-6 sm:mt-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+              <!-- Total -->
+              <article class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
+                <div class="flex items-start justify-between">
+                  <div class="h-11 w-11 rounded-2xl bg-sky-50 grid place-items-center">
+                    <svg class="h-5 w-5 text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M7 7h10" />
+                      <path d="M7 12h10" />
+                      <path d="M7 17h10" />
+                    </svg>
+                  </div>
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-sky-50 text-sky-700">
+                    today %
+                  </span>
+                </div>
+                <div class="mt-6">
+                  <p class="text-sm font-bold text-slate-500">Total Tasks</p>
+                  <p class="mt-1 text-3xl font-extrabold text-slate-900 leading-none">42</p>
+                </div>
+              </article>
+
+              <!-- Completed -->
+              <article class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
+                <div class="flex items-start justify-between">
+                  <div class="h-11 w-11 rounded-2xl bg-emerald-50 grid place-items-center">
+                    <svg class="h-5 w-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  </div>
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-50 text-emerald-700">
+                    Completed %
+                  </span>
+                </div>
+                <div class="mt-6">
+                  <p class="text-sm font-bold text-slate-500">Completed</p>
+                  <p class="mt-1 text-3xl font-extrabold text-slate-900 leading-none">28</p>
+                </div>
+              </article>
+
+              <!-- In Progress -->
+              <article class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
+                <div class="flex items-start justify-between">
+                  <div class="h-11 w-11 rounded-2xl bg-indigo-50 grid place-items-center">
+                    <svg class="h-5 w-5 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <circle cx="12" cy="12" r="8" />
+                      <path d="M12 8v4l2 2" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="mt-6">
+                  <p class="text-sm font-bold text-slate-500">In Progress</p>
+                  <p class="mt-1 text-3xl font-extrabold text-slate-900 leading-none">10</p>
+                </div>
+              </article>
+
+              <!-- Overdue -->
+              <article class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
+                <div class="flex items-start justify-between">
+                  <div class="h-11 w-11 rounded-2xl bg-rose-50 grid place-items-center">
+                    <svg class="h-5 w-5 text-rose-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M12 9v4" />
+                      <path d="M12 17h.01" />
+                      <path d="M10.3 4.3l-7.1 12.3A2 2 0 0 0 5 20h14a2 2 0 0 0 1.8-3.4L13.7 4.3a2 2 0 0 0-3.4 0z" />
+                    </svg>
+                  </div>
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-rose-50 text-rose-700">
+                    Top Priority
+                  </span>
+                </div>
+                <div class="mt-6">
+                  <p class="text-sm font-bold text-slate-500">Overdue</p>
+                  <p class="mt-1 text-3xl font-extrabold text-slate-900 leading-none">4</p>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+         <section class="mt-8">
+
+  <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-4">
+
+    <!-- Tabs -->
+    <div class="bg-slate-100/80 border border-slate-200 rounded-2xl p-1.5 flex items-center gap-1.5 w-full lg:w-auto">
+      <button type="button" data-tab="today"
+        class="tasks-tab flex-1 lg:flex-none px-4 h-10 rounded-xl text-sm font-extrabold transition
+               bg-white text-[#1D4ED8] shadow-sm">
+        Today Tasks
+      </button>
+
+      <button type="button" data-tab="upcoming"
+        class="tasks-tab flex-1 lg:flex-none px-4 h-10 rounded-xl text-sm font-extrabold transition
+               text-slate-600 hover:text-slate-900 hover:bg-white/70">
+        Upcoming
+      </button>
+
+      <button type="button" data-tab="completed"
+        class="tasks-tab flex-1 lg:flex-none px-4 h-10 rounded-xl text-sm font-extrabold transition
+               text-slate-600 hover:text-slate-900 hover:bg-white/70">
+        Completed
+      </button>
+    </div>
+
+    <!-- Add -->
+    <button id="openTaskModal" type="button"
+      class="inline-flex justify-center items-center gap-2 bg-[#1D4ED8] text-white font-extrabold
+             px-6 h-11 rounded-2xl shadow-[0_18px_30px_-20px_rgba(29,78,216,0.9)]
+             transition cursor-pointer w-full lg:w-auto
+             hover:bg-[#1B46C6] hover:-translate-y-0.5 hover:shadow-[0_22px_36px_-22px_rgba(29,78,216,0.95)]
+             active:translate-y-0">
+      <span class="text-xl leading-none" aria-hidden="true">+</span>
+      Add New Task
+    </button>
+
+  </div>
+
+  <!-- Task List -->
+  <div class="mt-6 space-y-5">
+
+    <!-- Card 1 -->
+    <article class="task-row bg-white border border-slate-200 rounded-3xl px-5 sm:px-6 py-5 shadow-sm" data-tab="today">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+
+        <label class="inline-flex items-center cursor-pointer shrink-0">
+          <input type="checkbox"
+            class="h-6 w-6 rounded-xl border-slate-300 text-[#1D4ED8] focus:ring-[#1D4ED8]/20" />
+        </label>
+
+        <div class="flex-1 text-left">
+          <p class="text-lg sm:text-xl font-extrabold text-slate-900">
+            Advanced Dashboard UI — Prototype
+          </p>
+          <div class="mt-2 flex flex-wrap items-center gap-4 text-sm font-bold text-slate-500">
+            <span class="inline-flex items-center gap-2">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 8v5l3 2" />
+                <circle cx="12" cy="12" r="9" />
+              </svg>
+              Morning
+            </span>
+            <span class="inline-flex items-center gap-2">
+              <span class="text-xl font-black leading-none text-slate-400">#</span>
+              Project
+            </span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between sm:justify-end gap-6">
+          <span class="px-4 h-9 inline-flex items-center rounded-full text-sm font-extrabold
+                       bg-rose-50 text-rose-700 border border-rose-100">
+            Top Priority
+          </span>
+          <div class="flex -space-x-2">
+            <img src="img/person-2.webp" class="h-9 w-9 rounded-full border-2 border-white object-cover" alt="A">
+            <img src="img/person-3.webp" class="h-9 w-9 rounded-full border-2 border-white object-cover" alt="B">
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="task-row bg-white border border-slate-200 rounded-3xl px-5 sm:px-6 py-5 shadow-sm" data-tab="upcoming">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+
+        <label class="inline-flex items-center cursor-pointer shrink-0">
+          <input type="checkbox"
+            class="h-6 w-6 rounded-xl border-slate-300 text-[#1D4ED8] focus:ring-[#1D4ED8]/20" />
+        </label>
+
+        <div class="flex-1 text-left">
+          <p class="text-lg sm:text-xl font-extrabold text-slate-900">
+            Monthly Reports Review with Dev Team
+          </p>
+          <p class="mt-2 text-sm font-bold text-slate-500">
+            Finance Department • Evening
+          </p>
+        </div>
+
+        <div class="flex items-center justify-between sm:justify-end gap-6">
+          <span class="px-4 h-9 inline-flex items-center rounded-full text-sm font-extrabold
+                       bg-sky-50 text-sky-700 border border-sky-100">
+            Medium
+          </span>
+          <div class="flex -space-x-2">
+            <img src="img/person-1.webp" class="h-10 w-10 rounded-full border-2 border-white object-cover" alt="User">
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="task-row bg-white border border-slate-200 rounded-3xl px-5 sm:px-6 py-5 shadow-sm" data-tab="completed">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+
+        <label class="inline-flex items-center cursor-pointer shrink-0">
+          <input type="checkbox" checked
+            class="h-6 w-6 rounded-xl border-slate-300 text-[#1D4ED8] focus:ring-[#1D4ED8]/20" />
+        </label>
+
+        <div class="flex-1 text-left">
+          <p class="text-lg sm:text-xl font-extrabold text-slate-900">
+            Annual Database Update
+          </p>
+          <p class="mt-2 text-sm font-bold text-slate-500">
+            Infrastructure • Evening
+          </p>
+        </div>
+
+        <div class="flex items-center justify-between sm:justify-end gap-6">
+          <span class="px-4 h-9 inline-flex items-center rounded-full text-sm font-extrabold
+                       bg-slate-50 text-slate-600 border border-slate-200">
+            Low
+          </span>
+          <div class="flex -space-x-2">
+            <img src="img/person-1.webp" class="h-9 w-9 rounded-full border-2 border-white object-cover" alt="A">
+            <img src="img/person-2.webp" class="h-9 w-9 rounded-full border-2 border-white object-cover" alt="B">
+            <img src="img/person-3.webp" class="h-9 w-9 rounded-full border-2 border-white object-cover" alt="C">
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+  </div>
+</section>
+        </div>
+      </main>
+    </div>
+
+
+
+
+
+<!-- Modal Overlay -->
+<div id="taskModal" class="fixed inset-0 z-50 hidden">
+  <!-- Backdrop -->
+  <div id="taskModalBackdrop" class="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px]"></div>
+
+  <!-- Modal Panel -->
+  <div class="relative h-full w-full flex items-center justify-center p-4">
+    <div class="w-full max-w-3xl bg-white rounded-3xl shadow-[0_20px_60px_-30px_rgba(15,23,42,0.55)] border border-slate-200 overflow-hidden">
+      
+     <!-- Header -->
+<div class="flex items-start justify-between gap-4 px-6 sm:px-8 pt-6">
+ 
+  <div class="flex items-start gap-3">
+    <div>
+      <div class="flex items-center gap-3">
+        <span
+          class="h-10 w-10 rounded-2xl bg-slate-100 border border-slate-200 grid place-items-center
+                 shadow-[0_10px_20px_-18px_rgba(15,23,42,0.25)]">
+          <svg class="h-5 w-5 text-[#0B2E6B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 10a4 4 0 1 1-7.9 1H7l-2 2H3v-2l2-2V7l2-2h6.1A4 4 0 0 1 21 10z" />
+            <circle cx="17" cy="10" r="1" />
+          </svg>
+        </span>
+        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Add New Task</h3>
+      </div>
+
+      <p class="mt-1 text-sm text-slate-500">
+        Fill in the details below to create a new task.
+      </p>
+    </div>
+  </div>
+
+  <!-- Close -->
+  <button id="closeTaskModal" type="button"
+    class="h-10 w-10 rounded-2xl bg-slate-100 border border-slate-200 grid place-items-center
+           hover:bg-slate-200/70 transition"
+    aria-label="Close">
+    <svg class="h-5 w-5 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M18 6L6 18" />
+      <path d="M6 6l12 12" />
+    </svg>
+  </button>
+</div>
+
+      <!-- Form -->
+      <form class="px-6 sm:px-8 pb-6 pt-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Task Name -->
+          <div class="md:col-span-1">
+            <label class="block text-sm font-bold text-slate-700 mb-2">Task Name</label>
+            <input type="text" placeholder="Enter task name..."
+              class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700
+                     outline-none transition focus:border-[#0B2E6B] focus:ring-2 focus:ring-[#0B2E6B]/20" />
+          </div>
+
+          <!-- Priority -->
+          <div class="md:col-span-1">
+            <label class="block text-sm font-bold text-slate-700 mb-2">Priority</label>
+            <div class="relative">
+              <select
+                class="w-full appearance-none rounded-2xl border border-slate-200 bg-white px-4 py-3 pr-10 text-sm text-slate-700
+                       outline-none transition focus:border-[#0B2E6B] focus:ring-2 focus:ring-[#0B2E6B]/20">
+                <option>Normal</option>
+                <option>Medium</option>
+                <option>High</option>
+                <option>Very High</option>
+              </select>
+
+              <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="md:col-span-1">
+            <label class="block text-sm font-bold text-slate-700 mb-2">Task Description</label>
+            <textarea rows="5" placeholder="Write task details and expected results..."
+              class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700
+                     outline-none transition focus:border-[#0B2E6B] focus:ring-2 focus:ring-[#0B2E6B]/20"></textarea>
+          </div>
+
+          <!-- Due Date + Assign -->
+          <div class="md:col-span-1 space-y-4">
+            <!-- Due Date -->
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-2">Due Date</label>
+              <div class="relative">
+                <input type="date"
+                  class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 pr-10 text-sm text-slate-700
+                         outline-none transition focus:border-[#0B2E6B] focus:ring-2 focus:ring-[#0B2E6B]/20" />
+                <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M8 2v4M16 2v4" />
+                  <path d="M3 10h18" />
+                  <path d="M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Assign to -->
+<div>
+  <label class="block text-sm font-bold text-slate-700 mb-2">Assign To</label>
+
+  <div class="flex items-center gap-3">
+    <!-- Avatars -->
+    <div class="flex -space-x-2">
+      <img class="h-10 w-10 rounded-full border-2 border-white object-cover" src="img/person-1.webp" alt="User 1">
+      <img class="h-10 w-10 rounded-full border-2 border-white object-cover" src="img/person-2.webp" alt="User 2">
+      <img class="h-10 w-10 rounded-full border-2 border-white object-cover" src="img/person-3.webp" alt="User 3">
+    </div>
+    
+    <button type="button"
+      class="group h-12 w-12 rounded-full border-2 border-dashed border-slate-300
+             bg-white grid place-items-center
+             transition cursor-pointer
+             hover:border-[#0B2E6B] hover:bg-slate-50">
+      <svg class="h-5 w-5 text-slate-500 transition group-hover:text-[#0B2E6B]"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M12 5v14" />
+        <path d="M5 12h14" />
+      </svg>
+    </button>
+
+    
+  </div>
+</div>
+
+          </div>
+        </div>
+
+        <!-- Actions -->
+       
+<div class="mt-8 flex items-center justify-between gap-6">
+  <!-- Primary (Big) -->
+  <button type="submit"
+    class="w-full max-w-[620px] h-14 rounded-2xl bg-[#153B7A] text-white font-extrabold text-base
+           shadow-[0_14px_26px_-18px_rgba(21,59,122,0.85)]
+           transition-all duration-200 cursor-pointer
+           hover:bg-[#12346B] hover:shadow-[0_18px_32px_-18px_rgba(21,59,122,0.95)] hover:-translate-y-0.5
+           active:translate-y-0 active:shadow-[0_14px_26px_-18px_rgba(21,59,122,0.85)]
+           focus:outline-none focus:ring-2 focus:ring-[#153B7A]/25">
+    Save Task
+  </button>
+
+  <!-- Secondary (Text) -->
+  <button id="cancelTaskModal" type="button"
+    class="shrink-0 px-3 h-14 inline-flex items-center justify-center
+           text-sm font-extrabold text-slate-500
+           cursor-pointer transition
+           hover:text-slate-800">
+    Cancel
+  </button>
+</div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="main.js"></script>
+ 
+  </body>
+</html>

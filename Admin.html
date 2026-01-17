@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="src/output.css" />
+  </head>
+<body class="bg-slate-50">
+  <div class="min-h-screen lg:flex">
+    <!-- SIDEBAR-->
+    <aside class="hidden lg:flex w-[320px] shrink-0 bg-[#0B2E6B] text-white min-h-screen flex-col">
+      <!-- Top area -->
+      <div class="p-5">
+        <div class="flex items-center justify-start">
+          <button
+            type="button"
+            class="inline-flex items-center gap-3 px-5 py-2.5 text-sm font-semibold
+                   bg-white/10 hover:bg-white/15 transition
+                   rounded-xl
+                   focus:outline-none focus:ring-2 focus:ring-white/30"
+          >
+            <span
+              class="h-9 w-9 grid place-items-center rounded-xl bg-white/10 border border-white/20"
+              aria-hidden="true"
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" />
+              </svg>
+            </span>
+            Add to list
+          </button>
+        </div>
+
+        <!-- Nav -->
+        <nav class="mt-6 space-y-2" aria-label="Primary navigation">
+          <a
+            href="#/dashboard"
+            class="group flex items-center gap-3 px-4 py-3 text-white/85 transition
+                   hover:bg-white/10 hover:text-white hover:rounded-lg
+                   focus:outline-none focus:ring-2 focus:ring-white/30"
+          >
+            <span
+              class="h-8 w-8 bg-white/10 grid place-items-center transition group-hover:bg-white/15"
+              aria-hidden="true"
+            >
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 13h8V3H3zM13 21h8V11h-8zM13 3h8v6h-8zM3 21h8v-6H3z" />
+              </svg>
+            </span>
+            Dashboard
+          </a>
+
+          <a
+            href="#/tasks"
+            class="group flex items-center gap-3 px-4 py-3 text-white/85 transition
+                   hover:bg-white/10 hover:text-white hover:rounded-lg
+                   focus:outline-none focus:ring-2 focus:ring-white/30"
+          >
+            <span
+              class="h-8 w-8 bg-white/10 grid place-items-center transition group-hover:bg-white/15"
+              aria-hidden="true"
+            >
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 11l3 3L22 4" />
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+              </svg>
+            </span>
+            Task Manager
+          </a>
+
+          <a
+            href="#/team"
+            class="group flex items-center gap-3 px-4 py-3 text-white/85 transition
+                   hover:bg-white/10 hover:text-white hover:rounded-lg
+                   focus:outline-none focus:ring-2 focus:ring-white/30"
+          >
+            <span
+              class="h-8 w-8 bg-white/10 grid place-items-center transition group-hover:bg-white/15"
+              aria-hidden="true"
+            >
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </span>
+            Team
+          </a>
+
+          <a
+            href="#/reports"
+            class="group flex items-center gap-3 px-4 py-3 text-white/85 transition
+                   hover:bg-white/10 hover:text-white hover:rounded-lg
+                   focus:outline-none focus:ring-2 focus:ring-white/30"
+          >
+            <span
+              class="h-8 w-8 bg-white/10 grid place-items-center transition group-hover:bg-white/15"
+              aria-hidden="true"
+            >
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 3v18h18" />
+                <path d="M7 14l4-4 3 3 5-6" />
+              </svg>
+            </span>
+            Reports
+          </a>
+        </nav>
+      </div>
+
+      <!-- Bottom upgrade card -->
+      <div class="mt-auto p-5">
+        <div class="bg-white/10 p-4">
+          <p class="font-semibold">Premium version</p>
+          <p class="mt-1 text-sm text-white/75">
+            Unlock advanced tools and better productivity.
+          </p>
+
+          <button
+            type="button"
+            class="mt-4 w-full bg-white text-[#0B2E6B] font-semibold py-2.5
+                   cursor-pointer
+                   transition-all duration-200
+                   hover:bg-white/90 hover:shadow-lg hover:-translate-y-0.5
+                   active:translate-y-0 active:shadow-md
+                   focus:outline-none focus:ring-2 focus:ring-white/30"
+          >
+            Upgrade now
+          </button>
+        </div>
+      </div>
+    </aside>
+
+     <!-- MAIN -->
+    <main class="flex-1 p-4 sm:p-6">
+      <div class="max-w-6xl mx-auto w-full">
+        <!-- Top Bar -->
+ 
+<header class="w-full bg-white border border-slate-200 mt-10 rounded-3xl overflow-hidden">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4">
+
+   
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:items-center">
+
+      <!-- Left: Welcome -->
+      <div class="col-span-1 flex items-center">
+        <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 whitespace-nowrap">
+          Welcome, Admin
+        </h2>
+      </div>
+
+      <!-- Right: Profile  -->
+      <div class="col-span-1 flex items-center justify-end gap-3 sm:col-start-3">
+        <div class="text-left leading-tight">
+          <p class="text-sm font-extrabold text-slate-900 whitespace-nowrap">Mohamed Ahmed</p>
+          <p class="text-xs text-slate-500 font-semibold whitespace-nowrap">Project Manager</p>
+        </div>
+
+        <img
+          src="img/Admin.webp"
+          alt="Admin avatar"
+          class="h-10 w-10 rounded-full object-cover border border-slate-200"
+        />
+      </div>
+
+      <!-- Center: Search  -->
+      <div class="col-span-2 sm:col-span-1 sm:col-start-2 sm:row-start-1">
+        <label class="relative block w-full sm:max-w-[520px] sm:mx-auto">
+          <span class="sr-only">Search</span>
+
+          <svg class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M21 21l-4.35-4.35"></path>
+          </svg>
+
+          <input
+            type="search"
+            placeholder="Search jobs or employees..."
+            class="w-full rounded-2xl border border-slate-200 bg-slate-50/70
+                   pl-10 pr-4 py-2.5 text-sm text-slate-700
+                   outline-none transition
+                   focus:bg-white focus:border-[#0B2E6B] focus:ring-2 focus:ring-[#0B2E6B]/20"
+          />
+        </label>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+
+<!-- STATS -->
+<section class="mt-16" dir="ltr">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- Card 1: Team Members -->
+    <article class="bg-white border border-slate-200/70 rounded-3xl p-6 shadow-sm">
+      <div class="flex flex-row-reverse items-start justify-between gap-4">
+        <!-- Icon -->
+        <div class="h-14 w-14 rounded-2xl bg-indigo-600 grid place-items-center shadow-[0_10px_20px_-12px_rgba(79,70,229,0.75)] shrink-0">
+          <svg class="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="8.5" cy="7" r="3" />
+            <path d="M20 8v6" />
+            <path d="M23 11h-6" />
+          </svg>
+        </div>
+
+        <!-- Content  -->
+        <div class="flex-1 text-left">
+          <p class="text-sm font-semibold text-slate-500">Team Members</p>
+          <p class="mt-2 text-4xl font-extrabold text-slate-900 leading-none">12</p>
+          <p class="mt-2 text-sm text-slate-400">Online now</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 2: Completed Tasks -->
+    <article class="bg-white border border-slate-200/70 rounded-3xl p-6 shadow-sm">
+      <div class="flex flex-row-reverse items-start justify-between gap-4">
+        <!-- Icon-->
+        <div class="h-14 w-14 rounded-2xl bg-sky-600 grid place-items-center shadow-[0_10px_20px_-12px_rgba(2,132,199,0.75)] shrink-0">
+          <svg class="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M9 12l2 2 4-4" />
+            <path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10z" />
+          </svg>
+        </div>
+
+        <!-- Content -->
+        <div class="flex-1 text-left">
+          <p class="text-sm font-semibold text-slate-500">Completed Tasks</p>
+          <p class="mt-2 text-4xl font-extrabold text-slate-900 leading-none">148</p>
+
+          <div class="mt-2 flex items-center justify-start gap-2">
+            <svg class="h-5 w-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M7 17l10-10" />
+              <path d="M7 7h10v10" />
+            </svg>
+            <span class="text-sm font-semibold text-emerald-600">Total achieved</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 3: Active Tasks -->
+    <article class="bg-white border border-slate-200/70 rounded-3xl p-6 shadow-sm">
+      <div class="flex flex-row-reverse items-start justify-between gap-4">
+        <!-- Icon (Right) -->
+        <div class="h-14 w-14 rounded-2xl bg-slate-900 grid place-items-center shadow-[0_10px_20px_-12px_rgba(15,23,42,0.75)] shrink-0">
+          <svg class="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 12h4l2-6 4 12 2-6h5" />
+          </svg>
+        </div>
+
+        <!-- Content-->
+        <div class="flex-1 text-left">
+          <p class="text-sm font-semibold text-slate-500">Active Tasks</p>
+          <p class="mt-2 text-4xl font-extrabold text-slate-900 leading-none">24</p>
+
+          <div class="mt-2 flex items-center justify-start gap-2">
+            <svg class="h-5 w-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M7 17l10-10" />
+              <path d="M7 7h10v10" />
+            </svg>
+            <span class="text-sm font-semibold text-emerald-600">Since last week</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- Current Tasks List Section -->
+<section class="mt-28">
+  <div class="bg-white/95 border border-slate-200/70 rounded-[28px] shadow-sm overflow-hidden">
+
+    <!-- Top bar-->
+<div class="flex items-center justify-between px-6 sm:px-8 py-5">
+
+  <!--Title-->
+  <div class="flex items-center gap-3">
+    <button type="button"
+      class="h-10 w-10 rounded-xl bg-slate-100 border border-slate-200 grid place-items-center
+             hover:bg-slate-200/70 transition">
+      <svg class="h-5 w-5 text-[#0B2E6B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M4 6h16" />
+        <path d="M4 12h16" />
+        <path d="M4 18h16" />
+      </svg>
+    </button>
+    <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+      Current Tasks List
+    </h2>
+  </div>
+
+  <button type="button"
+    class="inline-flex items-center gap-2 text-slate-600 font-semibold hover:text-slate-900 transition">
+    View All
+    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M9 18l6-6-6-6" />
+    </svg>
+  </button>
+
+</div>
+
+    <div class="border-t border-slate-200/70"></div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-sm">
+        <thead class="bg-slate-50/60">
+          <tr class="text-slate-500 font-bold">
+            <th class="px-6 sm:px-8 py-4 text-left whitespace-nowrap">Task Name</th>
+            <th class="px-6 sm:px-8 py-4 text-left whitespace-nowrap">Priority</th>
+            <th class="px-6 sm:px-8 py-4 text-left whitespace-nowrap">Status</th>
+            <th class="px-6 sm:px-8 py-4 text-left whitespace-nowrap">Due Date</th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y divide-slate-200/70">
+          <!-- Row 1 -->
+          <tr class="bg-white hover:bg-slate-50/50 transition">
+            <td class="px-6 sm:px-8 py-6">
+              <div class="font-extrabold text-slate-900">Design UI for the App</div>
+              <div class="text-xs text-slate-400 font-semibold mt-1">General update project</div>
+            </td>
+
+            <td class="px-6 sm:px-8 py-6">
+              <span class="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-extrabold
+                           bg-rose-50 text-rose-700">
+                Very High
+              </span>
+            </td>
+
+            <td class="px-6 sm:px-8 py-6">
+              <div class="inline-flex items-center gap-2 font-bold text-slate-700">
+                <span class="h-2.5 w-2.5 rounded-full bg-blue-500"></span>
+                In Progress
+              </div>
+            </td>
+
+            <td class="px-6 sm:px-8 py-6 font-semibold text-slate-600">
+              2026
+            </td>
+          </tr>
+
+          <!-- Row 2 -->
+          <tr class="bg-white hover:bg-slate-50/50 transition">
+            <td class="px-6 sm:px-8 py-6">
+              <div class="font-extrabold text-slate-900">Cloud Database Integration</div>
+              <div class="text-xs text-slate-400 font-semibold mt-1">Security & internal linking</div>
+            </td>
+
+            <td class="px-6 sm:px-8 py-6">
+              <span class="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-extrabold
+                           bg-amber-50 text-amber-700">
+                Medium
+              </span>
+            </td>
+
+            <td class="px-6 sm:px-8 py-6">
+              <div class="inline-flex items-center gap-2 font-bold text-slate-700">
+                <span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+                Completed
+              </div>
+            </td>
+
+            <td class="px-6 sm:px-8 py-6 font-semibold text-slate-600">
+              2026
+            </td>
+          </tr>
+
+          <!-- Row 3 -->
+          <tr class="bg-white hover:bg-slate-50/50 transition">
+            <td class="px-6 sm:px-8 py-6">
+              <div class="font-extrabold text-slate-900">Review Financial Reports</div>
+              <div class="text-xs text-slate-400 font-semibold mt-1">Accounting department</div>
+            </td>
+
+            <td class="px-6 sm:px-8 py-6">
+              <span class="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-extrabold
+                           bg-emerald-50 text-emerald-700">
+                Normal
+              </span>
+            </td>
+
+            <td class="px-6 sm:px-8 py-6">
+              <div class="inline-flex items-center gap-2 font-bold text-slate-700">
+                <span class="h-2.5 w-2.5 rounded-full bg-slate-400"></span>
+                Not Started
+              </div>
+            </td>
+
+            <td class="px-6 sm:px-8 py-6 font-semibold text-slate-600">
+              2026
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Add New Task button  -->
+<div class="mt-6 flex justify-end">
+  <button id="openTaskModal" type="button"
+    class="group inline-flex items-center gap-3 rounded-2xl bg-[#0B2E6B] text-white font-extrabold
+           px-5 py-3 shadow-sm cursor-pointer transition-all duration-200
+           hover:bg-[#0A2A60] hover:shadow-md hover:-translate-y-0.5
+           active:translate-y-0 active:shadow-sm
+           focus:outline-none focus:ring-2 focus:ring-[#0B2E6B]/30">
+    <span>Add New Task</span>
+
+    <span class="grid place-items-center h-9 w-9 rounded-xl bg-white/15 transition group-hover:bg-white/20">
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M12 5v14" />
+        <path d="M5 12h14" />
+      </svg>
+    </span>
+  </button>
+</div>
+
+<!-- Modal Overlay -->
+<div id="taskModal" class="fixed inset-0 z-50 hidden">
+  <!-- Backdrop -->
+  <div id="taskModalBackdrop" class="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px]"></div>
+
+  <!-- Modal Panel -->
+  <div class="relative h-full w-full flex items-center justify-center p-4">
+    <div class="w-full max-w-3xl bg-white rounded-3xl shadow-[0_20px_60px_-30px_rgba(15,23,42,0.55)] border border-slate-200 overflow-hidden">
+      
+     <!-- Header -->
+<div class="flex items-start justify-between gap-4 px-6 sm:px-8 pt-6">
+ 
+  <div class="flex items-start gap-3">
+    <div>
+      <div class="flex items-center gap-3">
+        <span
+          class="h-10 w-10 rounded-2xl bg-slate-100 border border-slate-200 grid place-items-center
+                 shadow-[0_10px_20px_-18px_rgba(15,23,42,0.25)]">
+          <svg class="h-5 w-5 text-[#0B2E6B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 10a4 4 0 1 1-7.9 1H7l-2 2H3v-2l2-2V7l2-2h6.1A4 4 0 0 1 21 10z" />
+            <circle cx="17" cy="10" r="1" />
+          </svg>
+        </span>
+        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Add New Task</h3>
+      </div>
+
+      <p class="mt-1 text-sm text-slate-500">
+        Fill in the details below to create a new task.
+      </p>
+    </div>
+  </div>
+
+  <!-- Close -->
+  <button id="closeTaskModal" type="button"
+    class="h-10 w-10 rounded-2xl bg-slate-100 border border-slate-200 grid place-items-center
+           hover:bg-slate-200/70 transition"
+    aria-label="Close">
+    <svg class="h-5 w-5 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M18 6L6 18" />
+      <path d="M6 6l12 12" />
+    </svg>
+  </button>
+</div>
+
+      <!-- Form -->
+      <form class="px-6 sm:px-8 pb-6 pt-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Task Name -->
+          <div class="md:col-span-1">
+            <label class="block text-sm font-bold text-slate-700 mb-2">Task Name</label>
+            <input type="text" placeholder="Enter task name..."
+              class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700
+                     outline-none transition focus:border-[#0B2E6B] focus:ring-2 focus:ring-[#0B2E6B]/20" />
+          </div>
+
+          <!-- Priority -->
+          <div class="md:col-span-1">
+            <label class="block text-sm font-bold text-slate-700 mb-2">Priority</label>
+            <div class="relative">
+              <select
+                class="w-full appearance-none rounded-2xl border border-slate-200 bg-white px-4 py-3 pr-10 text-sm text-slate-700
+                       outline-none transition focus:border-[#0B2E6B] focus:ring-2 focus:ring-[#0B2E6B]/20">
+                <option>Normal</option>
+                <option>Medium</option>
+                <option>High</option>
+                <option>Very High</option>
+              </select>
+
+              <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="md:col-span-1">
+            <label class="block text-sm font-bold text-slate-700 mb-2">Task Description</label>
+            <textarea rows="5" placeholder="Write task details and expected results..."
+              class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700
+                     outline-none transition focus:border-[#0B2E6B] focus:ring-2 focus:ring-[#0B2E6B]/20"></textarea>
+          </div>
+
+          <!-- Due Date + Assign -->
+          <div class="md:col-span-1 space-y-4">
+            <!-- Due Date -->
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-2">Due Date</label>
+              <div class="relative">
+                <input type="date"
+                  class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 pr-10 text-sm text-slate-700
+                         outline-none transition focus:border-[#0B2E6B] focus:ring-2 focus:ring-[#0B2E6B]/20" />
+                <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M8 2v4M16 2v4" />
+                  <path d="M3 10h18" />
+                  <path d="M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Assign to -->
+<div>
+  <label class="block text-sm font-bold text-slate-700 mb-2">Assign To</label>
+
+  <div class="flex items-center gap-3">
+    <!-- Avatars -->
+    <div class="flex -space-x-2">
+      <img class="h-10 w-10 rounded-full border-2 border-white object-cover" src="img/person-1.webp" alt="User 1">
+      <img class="h-10 w-10 rounded-full border-2 border-white object-cover" src="img/person-2.webp" alt="User 2">
+      <img class="h-10 w-10 rounded-full border-2 border-white object-cover" src="img/person-3.webp" alt="User 3">
+    </div>
+    
+    <button type="button"
+      class="group h-12 w-12 rounded-full border-2 border-dashed border-slate-300
+             bg-white grid place-items-center
+             transition cursor-pointer
+             hover:border-[#0B2E6B] hover:bg-slate-50">
+      <svg class="h-5 w-5 text-slate-500 transition group-hover:text-[#0B2E6B]"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M12 5v14" />
+        <path d="M5 12h14" />
+      </svg>
+    </button>
+
+    
+  </div>
+</div>
+
+          </div>
+        </div>
+
+        <!-- Actions -->
+       
+<div class="mt-8 flex items-center justify-between gap-6">
+  <!-- Primary (Big) -->
+  <button type="submit"
+    class="w-full max-w-[620px] h-14 rounded-2xl bg-[#153B7A] text-white font-extrabold text-base
+           shadow-[0_14px_26px_-18px_rgba(21,59,122,0.85)]
+           transition-all duration-200 cursor-pointer
+           hover:bg-[#12346B] hover:shadow-[0_18px_32px_-18px_rgba(21,59,122,0.95)] hover:-translate-y-0.5
+           active:translate-y-0 active:shadow-[0_14px_26px_-18px_rgba(21,59,122,0.85)]
+           focus:outline-none focus:ring-2 focus:ring-[#153B7A]/25">
+    Save Task
+  </button>
+
+  <!-- Secondary (Text) -->
+  <button id="cancelTaskModal" type="button"
+    class="shrink-0 px-3 h-14 inline-flex items-center justify-center
+           text-sm font-extrabold text-slate-500
+           cursor-pointer transition
+           hover:text-slate-800">
+    Cancel
+  </button>
+</div>
+
+      </form>
+    </div>
+  </div>
+</div>
+      </div>
+    </main>
+
+    <script src="main.js"></script>
+  </div>
+
+
